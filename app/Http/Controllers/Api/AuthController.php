@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\RechargePinSender;
+use App\Mail\RechargePin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
 
-    public function __construct(){
-        
+    public function __construct()
+    {
+
         $this->middleware('auth:sanctum')->except(['login', 'register']);
     }
 
@@ -36,8 +40,11 @@ class AuthController extends Controller
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'rechargePin' => rand(1000, 9999)
         ]);
 
+        RechargePinSender::dispatch($user);
+        // Mail::to($user)->send(new RechargePin($user));
         return $this->apiToken($user);
     }
 
@@ -63,8 +70,10 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request) {
-        $request->user()->currentAccessToken()->delete();
+    public function logout(Request $request)
+    {
+        dd($request->user());
+        // $request->user()->currentAccessToken()->delete();
         return response()->json(["message" => "Logout successful"], 200);
     }
 
@@ -72,7 +81,6 @@ class AuthController extends Controller
     {
         $token = $user->createToken('authToken');
 
-        return ['token' => $token->plainTextToken];
+        return response()->json(['token' => $token->plainTextToken, 'user' => $user], 200);
     }
-
 }

@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recharges', function (Blueprint $table) {
+        Schema::create('topups', function (Blueprint $table) {
             $table->id();
             $table->string('number')->nullable();
             $table->enum('type', ['prepaid', 'postpaid'])->default('prepaid');
             $table->string('amount')->nullable();
             $table->string('operator')->nullable();
-            $table->enum('status', ['requested', 'pending', 'successful', 'failed', 'cancelled', 'confirmed'])->default('requested');
+            $table->string('status')->default('requested');
             $table->integer('user_id');
+            $table->string('order_id')->nullable();
+            $table->string('tx_id')->nullable();
             $table->timestamps();
         });
     }

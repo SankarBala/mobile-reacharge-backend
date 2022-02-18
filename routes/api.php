@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\RechargeController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\TopupController;
+use App\Http\Controllers\WalletUpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::apiResource('/recharge', RechargeController::class)->names('recharge');
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+
+
+Route::apiResource('/recharge', TopupController::class)->names('recharge')->middleware('auth:sanctum');
+
+
+
+Route::get('/pay/{amount}', [WalletUpController::class, 'createPayment'])->middleware('auth:sanctum');
+Route::get('/payNow/{txid}', [WalletUpController::class, 'payNow'])->name('payNow');
+Route::get('/payment-check', [WalletUpController::class, 'paymentResponse'])->name('paymentResponse');

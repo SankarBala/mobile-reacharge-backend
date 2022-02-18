@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65e85f9f959c0b087110331754d451cf",
+    "content-hash": "13774e9578624279dffe7474cd3892e3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2788,6 +2788,39 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "smasif/shurjopay-laravel-package",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/smasif/shurjopay-laravel-package.git",
+                "reference": "fc6075002e274b535b4ac2904bc568b8db238abf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/smasif/shurjopay-laravel-package/get/fc6075002e274b535b4ac2904bc568b8db238abf.zip",
+                "reference": "fc6075002e274b535b4ac2904bc568b8db238abf",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "smasif\\ShurjopayLaravelPackage\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "wasim2263",
+                    "email": "abdullahwasim42@gmail.com"
+                }
+            ],
+            "homepage": "https://bitbucket.org/smasif/shurjopay-laravel-package",
+            "support": {
+                "source": "https://bitbucket.org/smasif/shurjopay-laravel-package/src/fc6075002e274b535b4ac2904bc568b8db238abf/?at=v1.0.3"
+            },
+            "time": "2020-05-18T11:22:19+00:00"
         },
         {
             "name": "symfony/console",
